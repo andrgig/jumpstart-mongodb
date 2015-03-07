@@ -1,0 +1,80 @@
+################# LESSON 1 #################
+// start a mongod instance via the terminal
+
+mongod  --dbpath mydatabase
+
+// now we have a mongod instance on localhost, default-port 27017
+
+################# LESSON 2 #################
+// new terminal window
+
+mongo
+
+show dbs
+show collections
+use mydatabase
+var  mydoc = {
+    name: 'my name',
+    place: 'Mannheim',
+    country: 'Germany'
+};
+db.mycollection.insert(mydoc)
+db.collection.find()
+db.collection.findOne()
+db.collection.find().pretty()
+
+################# LESSON 3 #################
+
+db.mycollection
+
+
+
+################# LESSON 4 #################
+// import some data
+// cd to dir with products.json
+mongoimport --db mydatabase --collection products products.json --stopOnError
+
+cursor = db.products.find();
+while ( cursor.hasNext() ) {
+   printjson( cursor.next() );
+}
+
+cursor = db.products.find().forEach(function(a){
+print(a.name);})
+
+
+################# LESSON 5 #################
+db.products.update({type: 'tv'}, {$set: {name: "Cable TV Basic SUPER Package"}})
+
+
+################# LESSON 6 #################
+-
+
+################# LESSON 7 #################
+db.products.ensureIndex({name: 1})
+
+
+################# LESSON 8 #################
+mongoimport -d zips -c zips zips.json
+use zips
+db.zips.aggregate([
+    {$match: {state: "MA"}},
+    {$group: {_id: "$state",
+                statepop: {$sum: "$pop"}}}
+    ]);
+
+
+db.zips.aggregate([
+    {$match: {pop: {$gte: 3000}}},
+    {$group: {_id: "$state",
+        statepop: {$sum: "$pop"}}},
+    {$sort: {statepop: -1}},
+    {$limit: 10}
+]);
+
+
+
+
+
+
+

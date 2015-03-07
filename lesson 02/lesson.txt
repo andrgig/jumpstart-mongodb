@@ -1,3 +1,0 @@
-// start a mongod instance via the terminal
-
-mongod  --dbpath mydatabase –rest --httpinterface
