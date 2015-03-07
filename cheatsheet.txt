@@ -73,8 +73,11 @@ db.zips.aggregate([
 ]);
 
 
+################# LESSON 9 #################
 
-
+mongod --dbpath db/ --replSet "jumpstart"
+rs.init()
+rs.add()
 
 
 
