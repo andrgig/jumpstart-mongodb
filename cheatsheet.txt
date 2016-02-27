@@ -30,6 +30,9 @@ db.mycollection
 
 
 ################# LESSON 4 #################
+--
+
+################# LESSON 5 #################
 // import some data
 // cd to dir with products.json
 mongoimport --db mydatabase --collection products products.json --stopOnError
@@ -43,18 +46,29 @@ cursor = db.products.find().forEach(function(a){
 print(a.name);})
 
 
-################# LESSON 5 #################
+################# LESSON 6 #################
 db.products.update({type: 'tv'}, {$set: {name: "Cable TV Basic SUPER Package"}})
 
 
 ################# LESSON 6 #################
--
+--
 
 ################# LESSON 7 #################
-db.products.ensureIndex({name: 1})
-
+--
 
 ################# LESSON 8 #################
+db.products.ensureIndex({name: 1})
+
+################# LESSON 9 #################
+db.zips.ensureIndex({state: 1}, {background: true})
+
+################# LESSON 10 #################
+--
+
+################# LESSON 11 #################
+--
+
+################# LESSON 12 #################
 mongoimport -d zips -c zips zips.json
 use zips
 db.zips.aggregate([
@@ -72,9 +86,7 @@ db.zips.aggregate([
     {$limit: 10}
 ]);
 
-
-################# LESSON 9 #################
-
+################# LESSON 13 #################
 mongod --dbpath db/ --replSet "jumpstart"
 rs.init()
 rs.add()
